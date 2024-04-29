@@ -1,13 +1,11 @@
-const weakMap = new WeakMap();
-// eslint-disable-next-line jest/require-hook
-let count = 0;
+export const weakMap = new WeakMap();
+let count = 1;
 
-function queryAPI(endpoint) {
-  weakMap.set(endpoint, count += 1);
-  const callsNum = weakMap.get(endpoint);
-  if (callsNum >= 5) {
-    throw new Error('Endpoint load is high.');
+export function queryAPI(endPoint) {
+  weakMap.set(endPoint, count);
+  count += 1;
+  const queryCount = weakMap.get(endPoint);
+  if (queryCount >= 5) {
+    throw new Error('Endpoint load is high');
   }
 }
-
-export { weakMap, queryAPI };
